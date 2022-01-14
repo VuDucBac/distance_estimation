@@ -221,8 +221,9 @@ def main(_argv):
             if (x2 - x1) != 0:
                 m = (y2 - y1) / (x2 - x1)
                 return m
-            else
+            else:
                 return 1
+
         def calculate_centr_distances(centroid_1, centroid_2):
             return math.sqrt((centroid_2[0] - centroid_1[0]) ** 2 + (centroid_2[1] - centroid_1[1]) ** 2)
 
@@ -260,8 +261,10 @@ def main(_argv):
         ax.axis('off')
         for perm in permutations:
             dist = calculate_centr_distances(perm[0], perm[1])
-            dist_m = dist / average_px_meter
-
+            dist_m = round(dist / average_px_meter,2)
+            dist_m_s=str(dist_m)
+            #print (dist_m_s)
+            #print('type:', type(dist_m_s).__name__)
             x1 = perm[0][0]
             y1 = perm[0][1]
             x2 = perm[1][0]
@@ -276,26 +279,29 @@ def main(_argv):
             dx = -slope * dy
 
             if randrange(10) % 2 == 0:
-                Dx = middle[0] - dx * 10
-                Dy = middle[1] - dy * 10
+                Dx = int(middle[0] - dx * 10)
+                Dy = int(middle[1] - dy * 10)
             else:
-                Dx = middle[0] + dx * 10
-                Dy = middle[1] + dy * 10
+                Dx = int(middle[0] + dx * 10)
+                Dy = int(middle[1] + dy * 10)
 
-            if dist_m < 1.5:
-                ax.annotate("{}m".format(round(dist_m, 2)), xy=middle, color='white', xytext=(Dx, Dy), fontsize=10,
-                            arrowprops=dict(arrowstyle='->', lw=1.5, color='yellow'))
-                            #bbox=dict(facecolor='red', edgecolor='white', boxstyle='round', pad=0.2), zorder=35)
-                ax.plot((perm[0][0], perm[1][0]), (perm[0][1], perm[1][1]), linewidth=2, color='yellow', zorder=15)
-            elif 1.5 < dist_m < 3.5:
-                ax.annotate("{}m".format(round(dist_m, 2)), xy=middle, color='black', xytext=(Dx, Dy), fontsize=8,
-                            arrowprops=dict(arrowstyle='->', lw=1.5, color='skyblue'))
-                            #bbox=dict(facecolor='y', edgecolor='white', boxstyle='round', pad=0.2), zorder=35)
-                ax.plot((perm[0][0], perm[1][0]), (perm[0][1], perm[1][1]), linewidth=2, color='skyblue', zorder=15)
-            else:
-                pass
-
-            ax.imshow(frame, interpolation='nearest')
+            
+            cv2.line(frame, perm[0], perm[1], (0, 255, 255), 2)
+            cv2.putText(frame, dist_m_s, (Dx, Dy), 0, 1e-3 * frame.shape[0], (0, 0,255), 1)
+           # if dist_m < 1.5:
+           #     ax.annotate("{}m".format(round(dist_m, 2)), xy=middle, color='white', xytext=(Dx, Dy), fontsize=10,
+           #                 arrowprops=dict(arrowstyle='->', lw=1.5, color='yellow'))
+           #                 #bbox=dict(facecolor='red', edgecolor='white', boxstyle='round', pad=0.2), zorder=35)
+           #     ax.plot((perm[0][0], perm[1][0]), (perm[0][1], perm[1][1]), linewidth=2, color='yellow', zorder=15)
+           # elif 1.5 < dist_m < 3.5:
+           #     ax.annotate("{}m".format(round(dist_m, 2)), xy=middle, color='black', xytext=(Dx, Dy), fontsize=8,
+           #                 arrowprops=dict(arrowstyle='->', lw=1.5, color='skyblue'))
+           #                 #bbox=dict(facecolor='y', edgecolor='white', boxstyle='round', pad=0.2), zorder=35)
+           #     ax.plot((perm[0][0], perm[1][0]), (perm[0][1], perm[1][1]), linewidth=2, color='skyblue', zorder=15)
+           # else:
+           #     pass
+          
+            #ax.imshow(frame, interpolation='nearest')
 ###########################################################################
         # calculate frames per second of running detections
         fps = 1.0 / (time.time() - start_time)
