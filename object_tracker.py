@@ -282,13 +282,13 @@ def main(_argv):
 
             if dist_m < 1.5:
                 ax.annotate("{}m".format(round(dist_m, 2)), xy=middle, color='white', xytext=(Dx, Dy), fontsize=10,
-                            arrowprops=dict(arrowstyle='->', lw=1.5, color='yellow'),
-                            bbox=dict(facecolor='red', edgecolor='white', boxstyle='round', pad=0.2), zorder=35)
+                            arrowprops=dict(arrowstyle='->', lw=1.5, color='yellow'))
+                            #bbox=dict(facecolor='red', edgecolor='white', boxstyle='round', pad=0.2), zorder=35)
                 ax.plot((perm[0][0], perm[1][0]), (perm[0][1], perm[1][1]), linewidth=2, color='yellow', zorder=15)
             elif 1.5 < dist_m < 3.5:
                 ax.annotate("{}m".format(round(dist_m, 2)), xy=middle, color='black', xytext=(Dx, Dy), fontsize=8,
-                            arrowprops=dict(arrowstyle='->', lw=1.5, color='skyblue'),
-                            bbox=dict(facecolor='y', edgecolor='white', boxstyle='round', pad=0.2), zorder=35)
+                            arrowprops=dict(arrowstyle='->', lw=1.5, color='skyblue'))
+                            #bbox=dict(facecolor='y', edgecolor='white', boxstyle='round', pad=0.2), zorder=35)
                 ax.plot((perm[0][0], perm[1][0]), (perm[0][1], perm[1][1]), linewidth=2, color='skyblue', zorder=15)
             else:
                 pass
