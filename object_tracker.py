@@ -218,9 +218,11 @@ def main(_argv):
             return permutations
 
         def calculate_slope(x1, y1, x2, y2):
-            m = (y2 - y1) / (x2 - x1)
-            return m
-
+            if (x2 - x1) != 0:
+                m = (y2 - y1) / (x2 - x1)
+                return m
+            else
+                return 1
         def calculate_centr_distances(centroid_1, centroid_2):
             return math.sqrt((centroid_2[0] - centroid_1[0]) ** 2 + (centroid_2[1] - centroid_1[1]) ** 2)
 
