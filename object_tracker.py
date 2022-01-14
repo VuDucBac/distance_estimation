@@ -230,7 +230,7 @@ def main(_argv):
         def get_midle(p1, p2):
             return ((p1[0] + p2[0]) / 2, (p1[1] + p2[1]) / 2)
 
-        average_px_meter = (width - 150) / 7
+        average_px_meter = (width) / 13.5
         centroids = []
         # update tracks (co san)
         for track in tracker.tracks:
@@ -253,7 +253,7 @@ def main(_argv):
         # if enable info flag then print details about each track
             if FLAGS.info:
                 print("Tracker ID: {}, Class: {},  BBox Coords (xmin, ymin, xmax, ymax): {}".format(str(track.track_id), class_name, (int(bbox[0]), int(bbox[1]), int(bbox[2]), int(bbox[3]))))
-############################################################### them vao
+###############################################################
         permutations = calculate_perm(centroids)
 
         fig, ax = plt.subplots(figsize=(20, 12), dpi=90, frameon=False)
@@ -285,9 +285,14 @@ def main(_argv):
                 Dx = int(middle[0] + dx * 10)
                 Dy = int(middle[1] + dy * 10)
 
-            
-            cv2.line(frame, perm[0], perm[1], (0, 255, 255), 2)
-            cv2.putText(frame, dist_m_s, (Dx, Dy), 0, 1e-3 * frame.shape[0], (255, 0, 0), 1)
+            if dist_m < 1.5 :
+              cv2.line(frame, perm[0], perm[1], (255, 0, 0), 2)
+              cv2.putText(frame, dist_m_s, (Dx, Dy), 0, 1e-3 * frame.shape[0], (255, 0, 0), 1)
+            elif 1.5 < dist_m < 3:
+              cv2.line(frame, perm[0], perm[1], (0, 0, 255), 2)
+              cv2.putText(frame, dist_m_s, (Dx, Dy), 0, 1e-3 * frame.shape[0], (0, 0, 255), 1)
+            else:
+              pass
            # if dist_m < 1.5:
            #     ax.annotate("{}m".format(round(dist_m, 2)), xy=middle, color='white', xytext=(Dx, Dy), fontsize=10,
            #                 arrowprops=dict(arrowstyle='->', lw=1.5, color='yellow'))
