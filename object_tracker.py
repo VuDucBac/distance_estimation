@@ -253,7 +253,7 @@ def main(_argv):
         # if enable info flag then print details about each track
             if FLAGS.info:
                 print("Tracker ID: {}, Class: {},  BBox Coords (xmin, ymin, xmax, ymax): {}".format(str(track.track_id), class_name, (int(bbox[0]), int(bbox[1]), int(bbox[2]), int(bbox[3]))))
-###############################################################
+############################################################### them vao
         permutations = calculate_perm(centroids)
 
         fig, ax = plt.subplots(figsize=(20, 12), dpi=90, frameon=False)
