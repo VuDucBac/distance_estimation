@@ -287,7 +287,7 @@ def main(_argv):
 
             
             cv2.line(frame, perm[0], perm[1], (0, 255, 255), 2)
-            cv2.putText(frame, dist_m_s, (Dx, Dy), 0, 1e-3 * frame.shape[0], (0, 0,255), 1)
+            cv2.putText(frame, dist_m_s, (Dx, Dy), 0, 1e-3 * frame.shape[0], (255, 0, 0), 1)
            # if dist_m < 1.5:
            #     ax.annotate("{}m".format(round(dist_m, 2)), xy=middle, color='white', xytext=(Dx, Dy), fontsize=10,
            #                 arrowprops=dict(arrowstyle='->', lw=1.5, color='yellow'))
